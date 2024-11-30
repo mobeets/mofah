@@ -3,8 +3,8 @@ let buffers = [];
 let cnvHght = window.innerHeight;
 let cnvWdth;
 let aspectRatio = 1.3333;
-let fps = 30;
-let maxLag = 90; // Maximum lag in frames
+let fps = 20;
+let maxLag = 60; // Maximum lag in frames
 
 function setup() {
   cnvWdth = floor(aspectRatio*cnvHght);

@@ -11,7 +11,7 @@ let maxLag = 60; // Maximum lag in frames
 function setup() {
   cnvWdth = floor(aspectRatio*cnvHght);
   createCanvas(cnvWdth, cnvHght);
-  capture = createCapture(VIDEO);
+  capture = createCapture(VIDEO, { flipped:true });
   capture.size(cnvWdth, cnvHght);
   capture.hide();
   
@@ -25,6 +25,7 @@ function setup() {
 }
 
 function draw() {
+
   // Draw the current frame into the most recent buffer
   let currentFrame = capture.get();
   buffers.push(currentFrame);

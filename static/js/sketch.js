@@ -35,24 +35,38 @@ function draw() {
 
   let lastLag = -1;
   let lagFrame;
+  let prevLagFrame;
+  let mix; // for mixing the two nearest frames
   for (let y = 0; y < height; y++) {
-    // Determine the lag for this row
-    let lag = floor(map(y, 0, height, 0, maxLag-1));
+
+    // Determine the lag for this row, proportional to row height
+    let cY = map(y, 0, height, 0, maxLag-1);
+    let lag = floor(cY);
+    let lagPrev = ceil(cY);
 
     if (lag != lastLag) { // do not reload unless we need to
-      // Get the corresponding frame from the buffer
+      // Get the two nearest frames from the buffer
+      prevLagFrame = buffers[buffers.length - 1 - lagPrev];
+      prevLagFrame.loadPixels();
       lagFrame = buffers[buffers.length - 1 - lag];
       lagFrame.loadPixels();
       lastLag = lag;
+    }
+    
+    // find mixture weight (between 0 and 1)
+    if (lagPrev > lag) {
+      mix = (cY - lag) / (lagPrev - lag);
+    } else {
+      mix = 0;
     }
 
     // Copy the row directly from the lag frame's pixels array
     for (let x = 0; x < width; x++) {
       let index = (y * width + x) * 4; // Calculate the pixel index
-      pixels[index] = lagFrame.pixels[index];       // Red
-      pixels[index + 1] = lagFrame.pixels[index + 1]; // Green
-      pixels[index + 2] = lagFrame.pixels[index + 2]; // Blue
-      pixels[index + 3] = lagFrame.pixels[index + 3]; // Alpha
+      pixels[index] = (1-mix)*lagFrame.pixels[index] + (mix)*prevLagFrame.pixels[index];
+      pixels[index + 1] = (1-mix)*lagFrame.pixels[index+1] + (mix)*prevLagFrame.pixels[index+1];
+      pixels[index + 2] = (1-mix)*lagFrame.pixels[index+2] + (mix)*prevLagFrame.pixels[index+2];
+      pixels[index + 3] = (1-mix)*lagFrame.pixels[index+3] + (mix)*prevLagFrame.pixels[index+3];
     }
   }
 

@@ -3,7 +3,7 @@ let buffers = [];
 let cnvHght = window.innerHeight;
 let cnvWdth;// = window.innerWidth;
 // let cnvWdth = 500;
-let cnvHght;
+// let cnvHght;
 let aspectRatio = 1.3333;
 let fps = 20;
 let maxLag = 60; // Maximum lag in frames

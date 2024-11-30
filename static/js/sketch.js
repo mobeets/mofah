@@ -9,7 +9,7 @@ let fps = 20;
 let maxLag = 60; // Maximum lag in frames
 
 function setup() {
-  cnvWdth = floor(aspectRatio*cnvWdth);
+  cnvWdth = floor(aspectRatio*cnvHght);
   createCanvas(cnvWdth, cnvHght);
   capture = createCapture(VIDEO);
   capture.size(cnvWdth, cnvHght);

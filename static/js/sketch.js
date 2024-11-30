@@ -1,13 +1,15 @@
 let capture;
 let buffers = [];
-let cnvWdth = 500;
-let cnvHght;
-let aspectRatio = 1.3333;
+var cnvWdth = window.innerWidth;
+var cnvHght = window.innerHeight;
+// let cnvWdth = 500;
+// let cnvHght;
+// let aspectRatio = 1.3333;
 let fps = 30;
 let maxLag = 90; // Maximum lag in frames
 
 function setup() {
-  cnvHght = floor(aspectRatio*cnvWdth);
+  // cnvHght = floor(aspectRatio*cnvWdth);
   createCanvas(cnvHght, cnvWdth);
   capture = createCapture(VIDEO);
   capture.size(cnvHght, cnvWdth);

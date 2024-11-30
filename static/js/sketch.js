@@ -1,12 +1,10 @@
 let capture;
 let buffers = [];
 let cnvHght = window.innerHeight;
-let cnvWdth;// = window.innerWidth;
-// let cnvWdth = 500;
-// let cnvHght;
+let cnvWdth;
 let aspectRatio = 1.3333;
-let fps = 20;
-let maxLag = 60; // Maximum lag in frames
+let fps = 30;
+let maxLag = 90; // Maximum lag in frames
 
 function setup() {
   cnvWdth = floor(aspectRatio*cnvHght);
